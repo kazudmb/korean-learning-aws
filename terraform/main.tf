@@ -207,9 +207,38 @@ resource "aws_iam_policy" "github_actions_policy" {
       {
         Effect = "Allow"
         Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:ListBucket"
+        ]
+        Resource = [
+          "arn:aws:s3:::korean-learning-terraform-state",
+          "arn:aws:s3:::korean-learning-terraform-state/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem"
+        ]
+        Resource = "arn:aws:dynamodb:ap-northeast-1:851725336428:table/korean-learning-terraform-locks"
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "cloudfront:CreateInvalidation"
         ]
         Resource = aws_cloudfront_distribution.korean_learning_distribution.arn
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "iam:GetRole",
+          "iam:PassRole"
+        ]
+        Resource = "*"
       }
     ]
   })
