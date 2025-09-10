@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline, Box } from '@mui/material';
 
-// Deployment test - v1.0.0
+// Deployment test - v1.1.0 - Fixed GitHub Actions pipeline
 import Header from './components/Header';
 import Hero from './components/Hero';
 import PhrasesSection from './components/PhrasesSection';
