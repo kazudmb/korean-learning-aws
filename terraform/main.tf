@@ -4,14 +4,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 4.0"
     }
   }
   
   backend "s3" {
     bucket         = "korean-learning-terraform-state"
     key            = "terraform/state"
-    region         = "us-east-1"
+    region         = "ap-northeast-1"
     encrypt        = true
     dynamodb_table = "korean-learning-terraform-locks"
   }
