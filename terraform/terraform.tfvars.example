@@ -1,0 +1,14 @@
+# AWS Configuration
+aws_region = "ap-northeast-1"
+
+# S3 Bucket Configuration
+bucket_name = "your-unique-korean-learning-site-bucket"
+
+# Environment
+environment = "dev"
+
+# Optional: Domain name (leave empty if not using custom domain)
+domain_name = ""
+
+# Project name
+project_name = "korean-learning-platform"
