@@ -1,9 +1,27 @@
 name: Deploy Korean Learning Site
 
 on:
+  # PRマージ時の自動デプロイ
   pull_request:
     types: [closed]
     branches: [main]
+  
+  # mainブランチへの直接プッシュ時の自動デプロイ
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+  
+  # 手動実行トリガー
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deploy environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
 
 permissions:
   id-token: write
@@ -11,10 +29,23 @@ permissions:
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true
+    # PRマージ時、直接プッシュ時、または手動実行時に実行
+    if: |
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true) ||
+      (github.event_name == 'push') ||
+      (github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     
     steps:
+    - name: Display deployment info
+      run: |
+        echo "🚀 Deployment triggered by: ${{ github.event_name }}"
+        echo "📦 Deploying from branch: ${{ github.ref_name }}"
+        echo "💾 Commit SHA: ${{ github.sha }}"
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "🎯 Manual deployment to: ${{ github.event.inputs.environment }}"
+        fi
+    
     - name: Checkout code
       uses: actions/checkout@v4
 
