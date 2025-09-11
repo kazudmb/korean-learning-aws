@@ -70,7 +70,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-        aws-region: us-east-1
+        aws-region: ap-northeast-1
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
@@ -83,9 +83,13 @@ jobs:
     - name: Deploy to S3
       run: |
         cd frontend
-        aws s3 sync build/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
+        echo "🪣 Deploying to S3 bucket: ${{ secrets.S3_BUCKET_NAME }}"
+        aws s3 sync build/ s3://${{ secrets.S3_BUCKET_NAME }} --delete --region ap-northeast-1
+        echo "✅ S3 deployment completed"
 
     - name: Invalidate CloudFront
       run: |
+        echo "🌐 Invalidating CloudFront distribution: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
         aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+        echo "✅ CloudFront invalidation completed"
 
