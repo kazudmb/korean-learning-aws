@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { QuizResult as QuizResultType } from '../types';
+import { useAppStore } from '../store/useAppStore';
 
 interface QuizResultProps {
   result: QuizResultType;
@@ -10,6 +11,7 @@ interface QuizResultProps {
 }
 
 const QuizResult: React.FC<QuizResultProps> = ({ result, onRetry }) => {
+  const { resetQuiz } = useAppStore();
   const percentage = Math.round((result.score / result.totalQuestions) * 100);
   
   const getResultMessage = () => {
@@ -102,7 +104,7 @@ const QuizResult: React.FC<QuizResultProps> = ({ result, onRetry }) => {
               もう一度
             </Button>
             <Button
-              onClick={() => window.location.reload()}
+              onClick={resetQuiz}
             >
               戻る
             </Button>

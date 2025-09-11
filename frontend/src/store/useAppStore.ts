@@ -98,6 +98,19 @@ export const useAppStore = create<AppState>((set, get) => ({
     });
   },
 
+  retryQuiz: () => {
+    const state = get();
+    if (!state.currentQuiz) return;
+    
+    set({
+      currentQuestionIndex: 0,
+      userAnswers: [],
+      quizResult: null,
+      isQuizActive: true,
+      error: null,
+    });
+  },
+
   setError: (error: string | null) => {
     set({ error });
   },

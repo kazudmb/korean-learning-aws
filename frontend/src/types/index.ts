@@ -80,6 +80,7 @@ export interface AppState {
   nextQuestion: () => void;
   finishQuiz: () => void;
   resetQuiz: () => void;
+  retryQuiz: () => void;
   setError: (error: string | null) => void;
 }
 

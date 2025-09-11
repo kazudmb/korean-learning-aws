@@ -14,6 +14,7 @@ const QuizArea: React.FC = () => {
     answerQuestion,
     nextQuestion,
     resetQuiz,
+    retryQuiz,
   } = useAppStore();
 
   if (!currentQuiz) return null;
@@ -24,7 +25,7 @@ const QuizArea: React.FC = () => {
   const isAnswered = !!currentAnswer;
 
   if (quizResult) {
-    return <QuizResult result={quizResult} onRetry={resetQuiz} />;
+    return <QuizResult result={quizResult} onRetry={retryQuiz} />;
   }
 
   const handleOptionSelect = (optionIndex: number) => {
