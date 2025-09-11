@@ -83,7 +83,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
     set({
       quizResult: result,
-      isQuizActive: false,
+      isQuizActive: true,
     });
   },
 
