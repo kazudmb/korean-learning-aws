@@ -1,18 +1,8 @@
 import React from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  List,
-  ListItem,
-  ListItemText,
-  Alert,
-} from '@mui/material';
-import { CheckCircle as CheckIcon } from '@mui/icons-material';
 import { motion } from 'framer-motion';
+import { CheckCircle } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Container } from '@/components/ui/container';
 import { Level } from '../types';
 
 const levels: Level[] = [
@@ -58,48 +48,27 @@ const LevelsSection: React.FC = () => {
   };
 
   return (
-    <Box
-      id="levels"
-      sx={{
-        py: 6,
-        mx: { xs: 1, md: 2 },
-        my: 4,
-      }}
-    >
+    <div id="levels" className="py-12 mx-2 md:mx-4 my-8">
       <Container maxWidth="lg">
-        <Card
-          sx={{
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '20px',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-            p: { xs: 2, md: 4 },
-          }}
-        >
+        <Card className="glass-effect rounded-3xl shadow-2xl p-4 md:p-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <Typography
-              variant="h3"
-              component="h2"
-              sx={{
-                textAlign: 'center',
-                mb: 4,
-                color: '#333',
-                fontSize: { xs: '2rem', md: '2.5rem' },
-              }}
-            >
-              🎯 レベル別学習
-            </Typography>
+            <CardHeader className="text-center">
+              <CardTitle className="text-3xl md:text-4xl text-gray-800 mb-4">
+                🎯 レベル別学習
+              </CardTitle>
+            </CardHeader>
           </motion.div>
 
-          <Grid container spacing={3} sx={{ mb: 4 }}>
-            {levels.map((level, index) => (
-              <Grid item xs={12} md={4} key={level.id}>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {levels.map((level, index) => (
                 <motion.div
+                  key={level.id}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -109,91 +78,51 @@ const LevelsSection: React.FC = () => {
                 >
                   <Card
                     onClick={() => handleLevelSelect(level)}
-                    sx={{
-                      background: level.color,
-                      color: 'white',
-                      cursor: 'pointer',
-                      height: '100%',
-                      minHeight: 300,
-                      borderRadius: 2,
-                      transition: 'all 0.3s ease',
-                      '&:hover': {
-                        boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-                      },
-                    }}
+                    className="text-white cursor-pointer h-full min-h-[300px] transition-all duration-300 hover:shadow-2xl"
+                    style={{ background: level.color }}
                   >
-                    <CardContent sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
-                      <Typography
-                        variant="h4"
-                        component="h3"
-                        sx={{
-                          mb: 2,
-                          fontSize: { xs: '1.3rem', md: '1.5rem' },
-                          fontWeight: 'bold',
-                        }}
-                      >
+                    <CardContent className="p-6 h-full flex flex-col">
+                      <h3 className="text-xl md:text-2xl font-bold mb-4">
                         {level.title}
-                      </Typography>
+                      </h3>
 
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          mb: 3,
-                          opacity: 0.9,
-                          fontSize: '1rem',
-                        }}
-                      >
+                      <p className="mb-6 opacity-90 text-base">
                         {level.description}
-                      </Typography>
+                      </p>
 
-                      <List sx={{ flex: 1 }}>
+                      <div className="flex-1">
                         {level.features.map((feature, featureIndex) => (
-                          <ListItem key={featureIndex} sx={{ px: 0, py: 0.5 }}>
-                            <CheckIcon sx={{ mr: 1, fontSize: '1.2rem' }} />
-                            <ListItemText
-                              primary={feature}
-                              primaryTypographyProps={{
-                                fontSize: '0.9rem',
-                              }}
-                              sx={{ opacity: 0.9 }}
-                            />
-                          </ListItem>
+                          <div key={featureIndex} className="flex items-center py-1">
+                            <CheckCircle className="mr-2 h-5 w-5" />
+                            <span className="text-sm opacity-90">{feature}</span>
+                          </div>
                         ))}
-                      </List>
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>
-              </Grid>
-            ))}
-          </Grid>
+              ))}
+            </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <Alert
-              severity="info"
-              sx={{
-                background: 'rgba(102, 126, 234, 0.1)',
-                border: '1px solid rgba(102, 126, 234, 0.2)',
-                borderRadius: 2,
-              }}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              viewport={{ once: true }}
             >
-              <Typography variant="body1" sx={{ fontWeight: 'bold', mb: 1 }}>
-                💡 学習のコツ
-              </Typography>
-              <Typography variant="body2">
-                レベルに関係なく、実際に韓国人の友達と会話することが一番の近道です！
-                フレーズを覚えたら、積極的に使ってみましょう。間違いを恐れずに、
-                楽しみながら学習を続けることが大切です。
-              </Typography>
-            </Alert>
-          </motion.div>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <h4 className="font-bold mb-2 text-gray-800">💡 学習のコツ</h4>
+                <p className="text-sm text-gray-700">
+                  レベルに関係なく、実際に韓国人の友達と会話することが一番の近道です！
+                  フレーズを覚えたら、積極的に使ってみましょう。間違いを恐れずに、
+                  楽しみながら学習を続けることが大切です。
+                </p>
+              </div>
+            </motion.div>
+          </CardContent>
         </Card>
       </Container>
-    </Box>
+    </div>
   );
 };
 

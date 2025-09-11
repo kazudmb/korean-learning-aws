@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Container } from '@/components/ui/container';
 
 const Hero: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -11,35 +12,18 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2))',
-        py: { xs: 8, md: 12 },
-        mt: { xs: 7, md: 8 },
-        textAlign: 'center',
-        color: 'white',
-      }}
-    >
+    <div className="glass-effect py-16 md:py-24 mt-16 md:mt-20 text-center text-white">
       <Container maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Typography
-            variant="h2"
-            component="h2"
-            sx={{
-              fontSize: { xs: '2rem', md: '3rem' },
-              mb: 2,
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
-              fontWeight: 700,
-            }}
-          >
+          <h2 className="text-3xl md:text-5xl mb-4 drop-shadow-lg font-bold">
             実際の会話で使われる
             <br />
             韓国語をマスターしよう
-          </Typography>
+          </h2>
         </motion.div>
 
         <motion.div
@@ -47,19 +31,11 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <Typography
-            variant="h6"
-            sx={{
-              fontSize: { xs: '1rem', md: '1.2rem' },
-              mb: 4,
-              opacity: 0.9,
-              fontWeight: 400,
-            }}
-          >
+          <p className="text-base md:text-xl mb-8 opacity-90 font-normal">
             教科書にない自然な話し言葉とパンマルを
             <br />
             段階的に学習できます
-          </Typography>
+          </p>
         </motion.div>
 
         <motion.div
@@ -68,32 +44,16 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <Button
-            variant="contained"
-            size="large"
+            variant="gradient"
+            size="lg"
             onClick={() => scrollToSection('phrases')}
-            sx={{
-              background: 'linear-gradient(45deg, #ff6b6b, #feca57)',
-              color: 'white',
-              border: 'none',
-              px: 4,
-              py: 2,
-              fontSize: '1.1rem',
-              borderRadius: '50px',
-              fontWeight: 'bold',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
-              '&:hover': {
-                background: 'linear-gradient(45deg, #ff5252, #ffd54f)',
-                transform: 'translateY(-2px)',
-                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3)',
-              },
-              transition: 'all 0.3s ease',
-            }}
+            className="px-8 py-4 text-lg font-bold rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
           >
             学習を始める
           </Button>
         </motion.div>
       </Container>
-    </Box>
+    </div>
   );
 };
 

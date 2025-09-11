@@ -1,19 +1,8 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Button,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
 const Header: React.FC = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -22,34 +11,19 @@ const Header: React.FC = () => {
   };
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{
-        background: 'rgba(255, 255, 255, 0.95)',
-        backdropFilter: 'blur(10px)',
-        boxShadow: '0 2px 20px rgba(0, 0, 0, 0.1)',
-      }}
-    >
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Typography
-            variant="h6"
-            component="h1"
-            sx={{
-              color: '#667eea',
-              fontWeight: 'bold',
-              fontSize: isMobile ? '1.2rem' : '1.5rem',
-            }}
-          >
+          <h1 className="text-xl md:text-2xl font-bold text-[#667eea]">
             🇰🇷 韓国語話し言葉マスター
-          </Typography>
+          </h1>
         </motion.div>
 
-        <Box sx={{ display: 'flex', gap: isMobile ? 1 : 2 }}>
+        <div className="flex gap-2 md:gap-4">
           {[
             { label: 'フレーズ集', id: 'phrases' },
             { label: '練習問題', id: 'quiz' },
@@ -62,25 +36,17 @@ const Header: React.FC = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Button
-                color="primary"
+                variant="ghost"
                 onClick={() => scrollToSection(item.id)}
-                sx={{
-                  fontWeight: 500,
-                  borderRadius: '20px',
-                  px: isMobile ? 1 : 2,
-                  fontSize: isMobile ? '0.8rem' : '0.9rem',
-                  '&:hover': {
-                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                  },
-                }}
+                className="font-medium rounded-full px-3 md:px-4 text-sm md:text-base hover:bg-[#667eea]/10 text-[#667eea]"
               >
                 {item.label}
               </Button>
             </motion.div>
           ))}
-        </Box>
-      </Toolbar>
-    </AppBar>
+        </div>
+      </div>
+    </header>
   );
 };
 

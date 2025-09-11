@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  LinearProgress,
-  Button,
-  Paper,
-  Grid,
-  Alert,
-} from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { useAppStore } from '../store/useAppStore';
 import QuizResult from './QuizResult';
 
@@ -42,191 +35,94 @@ const QuizArea: React.FC = () => {
 
   const handleNext = () => {
     if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-      // まだ次の問題がある場合
       nextQuestion();
     } else {
-      // 最後の問題の場合、結果画面に移る
       useAppStore.getState().finishQuiz();
     }
   };
 
   return (
-    <Box>
+    <div>
       {/* Header */}
-      <Box sx={{ mb: 4 }}>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            mb: 2,
-            flexWrap: 'wrap',
-            gap: 2,
-          }}
-        >
-          <Typography variant="h5" sx={{ color: '#667eea', fontWeight: 'bold' }}>
+      <div className="mb-8">
+        <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
+          <h3 className="text-xl font-bold text-[#667eea]">
             {currentQuiz.title}
-          </Typography>
-          <Typography variant="body1" sx={{ color: '#666' }}>
+          </h3>
+          <span className="text-gray-600">
             {currentQuestionIndex + 1} / {currentQuiz.questions.length}
-          </Typography>
-        </Box>
+          </span>
+        </div>
         
-        <LinearProgress
-          variant="determinate"
-          value={progress}
-          sx={{
-            height: 8,
-            borderRadius: 4,
-            backgroundColor: '#e9ecef',
-            '& .MuiLinearProgress-bar': {
-              background: 'linear-gradient(45deg, #667eea, #764ba2)',
-              borderRadius: 4,
-            },
-          }}
-        />
-      </Box>
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div 
+            className="bg-gradient-to-r from-[#667eea] to-[#764ba2] h-2 rounded-full transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
 
       {/* Question */}
-      <motion.div
-        key={currentQuestionIndex}
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Paper
-          sx={{
-            p: 3,
-            mb: 3,
-            background: 'white',
-            borderLeft: '4px solid #667eea',
-            borderRadius: 2,
-          }}
-        >
-          <Typography
-            variant="h6"
-            sx={{
-              fontSize: { xs: '1.1rem', md: '1.3rem' },
-              textAlign: 'center',
-              color: '#333',
-            }}
-          >
-            {currentQuestion.question}
-          </Typography>
-        </Paper>
-      </motion.div>
-
-      {/* Options */}
-      <Grid container spacing={2} sx={{ mb: 3 }}>
-        {currentQuestion.options.map((option, index) => (
-          <Grid item xs={12} md={6} key={index}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-            >
-              <Paper
-                onClick={() => handleOptionSelect(index)}
-                sx={{
-                  p: 2,
-                  cursor: isAnswered ? 'default' : 'pointer',
-                  border: '2px solid transparent',
-                  borderRadius: 2,
-                  transition: 'all 0.3s ease',
-                  backgroundColor: isAnswered
-                    ? index === currentQuestion.correct
-                      ? 'rgba(40, 167, 69, 0.1)'
-                      : index === (currentAnswer?.selectedIndex ?? -1)
-                      ? 'rgba(220, 53, 69, 0.1)'
-                      : 'white'
-                    : (currentAnswer?.selectedIndex ?? -1) === index
-                    ? 'rgba(102, 126, 234, 0.1)'
-                    : 'white',
-                  borderColor: isAnswered
-                    ? index === currentQuestion.correct
-                      ? '#28a745'
-                      : index === (currentAnswer?.selectedIndex ?? -1)
-                      ? '#dc3545'
-                      : 'transparent'
-                    : (currentAnswer?.selectedIndex ?? -1) === index
-                    ? '#667eea'
-                    : 'transparent',
-                  '&:hover': !isAnswered
-                    ? {
-                        backgroundColor: '#f0f0f0',
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                      }
-                    : {},
-                }}
-              >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    textAlign: 'center',
-                    color: '#333',
-                    fontWeight: (currentAnswer?.selectedIndex ?? -1) === index ? 'bold' : 'normal',
-                  }}
-                >
-                  {option}
-                </Typography>
-              </Paper>
-            </motion.div>
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* Feedback */}
-      <AnimatePresence>
-        {isAnswered && (
+      <Card className="mb-6">
+        <CardContent className="p-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            key={currentQuestionIndex}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Alert
-              severity={currentAnswer.isCorrect ? 'success' : 'error'}
-              sx={{ mb: 3 }}
-            >
-              <Typography variant="body1" sx={{ fontWeight: 'bold', mb: 1 }}>
-                {currentAnswer.isCorrect ? '正解！' : '不正解'}
-              </Typography>
-              <Typography variant="body2">
-                {currentQuestion.explanation}
-              </Typography>
-            </Alert>
+            <h4 className="text-lg font-semibold text-gray-800 mb-4">
+              Q{currentQuestionIndex + 1}. {currentQuestion.question}
+            </h4>
+            
+            <div className="grid gap-3">
+              {currentQuestion.options.map((option, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: isAnswered ? 1 : 1.02 }}
+                  whileTap={{ scale: isAnswered ? 1 : 0.98 }}
+                >
+                  <Button
+                    variant={currentAnswer === index ? "default" : "outline"}
+                    onClick={() => handleOptionSelect(index)}
+                    disabled={isAnswered}
+                    className={`w-full p-4 text-left justify-start h-auto ${
+                      isAnswered && index === currentQuestion.correct
+                        ? 'bg-green-500 text-white'
+                        : isAnswered && currentAnswer === index && index !== currentQuestion.correct
+                        ? 'bg-red-500 text-white'
+                        : ''
+                    }`}
+                  >
+                    <span className="font-medium mr-3">
+                      {String.fromCharCode(65 + index)}.
+                    </span>
+                    {option}
+                  </Button>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </CardContent>
+      </Card>
 
-      {/* Controls */}
-      {isAnswered && (
-        <Box sx={{ textAlign: 'center' }}>
-          <Button
-            variant="contained"
-            size="large"
-            onClick={handleNext}
-            sx={{
-              background: 'linear-gradient(45deg, #667eea, #764ba2)',
-              px: 4,
-              py: 1.5,
-              borderRadius: '25px',
-              fontWeight: 'bold',
-              '&:hover': {
-                transform: 'translateY(-2px)',
-                boxShadow: '0 6px 20px rgba(102, 126, 234, 0.3)',
-              },
-              transition: 'all 0.3s ease',
-            }}
-          >
-            {currentQuestionIndex < currentQuiz.questions.length - 1
-              ? '次の問題'
-              : '結果を見る'}
-          </Button>
-        </Box>
-      )}
-    </Box>
+      {/* Navigation */}
+      <div className="flex justify-between items-center">
+        <Button
+          variant="outline"
+          onClick={resetQuiz}
+        >
+          終了
+        </Button>
+        
+        <Button
+          onClick={handleNext}
+          disabled={!isAnswered}
+        >
+          {currentQuestionIndex < currentQuiz.questions.length - 1 ? '次へ' : '結果を見る'}
+        </Button>
+      </div>
+    </div>
   );
 };
 

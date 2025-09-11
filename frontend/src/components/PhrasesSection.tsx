@@ -1,14 +1,9 @@
 import React from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Card,
-  IconButton,
-} from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Container } from '@/components/ui/container';
 import { useAppStore } from '../store/useAppStore';
 import CategoryCard from './CategoryCard';
 import PhraseItem from './PhraseItem';
@@ -17,48 +12,27 @@ const PhrasesSection: React.FC = () => {
   const { categories, selectedCategory, selectCategory, clearCategory } = useAppStore();
 
   return (
-    <Box
-      id="phrases"
-      sx={{
-        py: 6,
-        mx: { xs: 1, md: 2 },
-        my: 4,
-      }}
-    >
+    <div id="phrases" className="py-12 mx-2 md:mx-4 my-8">
       <Container maxWidth="lg">
-        <Card
-          sx={{
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '20px',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-            p: { xs: 2, md: 4 },
-          }}
-        >
+        <Card className="glass-effect rounded-3xl shadow-2xl p-4 md:p-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <Typography
-              variant="h3"
-              component="h2"
-              sx={{
-                textAlign: 'center',
-                mb: 4,
-                color: '#333',
-                fontSize: { xs: '2rem', md: '2.5rem' },
-              }}
-            >
-              📱 シーン別フレーズ
-            </Typography>
+            <CardHeader className="text-center">
+              <CardTitle className="text-3xl md:text-4xl text-gray-800 mb-4">
+                📱 シーン別フレーズ
+              </CardTitle>
+            </CardHeader>
           </motion.div>
 
-          <Grid container spacing={3} sx={{ mb: 4 }}>
-            {categories.map((category, index) => (
-              <Grid item xs={12} sm={6} md={3} key={category.id}>
+          <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+              {categories.map((category, index) => (
                 <motion.div
+                  key={category.id}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -69,77 +43,52 @@ const PhrasesSection: React.FC = () => {
                     onClick={selectCategory}
                   />
                 </motion.div>
-              </Grid>
-            ))}
-          </Grid>
+              ))}
+            </div>
 
-          <AnimatePresence>
-            {selectedCategory && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Card
-                  sx={{
-                    background: '#f8f9fa',
-                    borderRadius: 2,
-                    p: 3,
-                    mt: 3,
-                    border: '1px solid #e9ecef',
-                  }}
+            <AnimatePresence>
+              {selectedCategory && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      mb: 2,
-                      pb: 2,
-                      borderBottom: '2px solid #667eea',
-                    }}
-                  >
-                    <Typography
-                      variant="h5"
-                      sx={{ color: '#667eea', fontWeight: 'bold' }}
-                    >
-                      {selectedCategory.title}
-                    </Typography>
-                    <IconButton
-                      onClick={clearCategory}
-                      sx={{
-                        background: '#ff6b6b',
-                        color: 'white',
-                        '&:hover': {
-                          background: '#ff5252',
-                        },
-                      }}
-                    >
-                      <CloseIcon />
-                    </IconButton>
-                  </Box>
+                  <Card className="bg-gray-50 border border-gray-200 mt-6 p-6">
+                    <div className="flex justify-between items-center mb-4 pb-4 border-b-2 border-[#667eea]">
+                      <h3 className="text-xl font-bold text-[#667eea]">
+                        {selectedCategory.title}
+                      </h3>
+                      <Button
+                        variant="destructive"
+                        size="icon"
+                        onClick={clearCategory}
+                        className="bg-red-500 hover:bg-red-600 rounded-full"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
 
-                  <Grid container spacing={2}>
-                    {selectedCategory.phrases.map((phrase, index) => (
-                      <Grid item xs={12} md={6} key={index}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {selectedCategory.phrases.map((phrase, index) => (
                         <motion.div
+                          key={index}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.4, delay: index * 0.1 }}
                         >
                           <PhraseItem phrase={phrase} />
                         </motion.div>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Card>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                      ))}
+                    </div>
+                  </Card>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </CardContent>
         </Card>
       </Container>
-    </Box>
+    </div>
   );
 };
 

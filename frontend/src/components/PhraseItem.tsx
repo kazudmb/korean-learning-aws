@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardContent, Typography, Box } from '@mui/material';
 import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
 import { PhraseItemProps } from '../types';
 
 const PhraseItem: React.FC<PhraseItemProps> = ({ phrase }) => {
@@ -9,77 +9,25 @@ const PhraseItem: React.FC<PhraseItemProps> = ({ phrase }) => {
       whileHover={{ x: 5, scale: 1.01 }}
       transition={{ duration: 0.2 }}
     >
-      <Card
-        sx={{
-          background: 'white',
-          borderLeft: '4px solid #667eea',
-          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-          borderRadius: 2,
-          transition: 'all 0.2s ease',
-          height: '100%',
-          '&:hover': {
-            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
-          },
-        }}
-      >
-        <CardContent sx={{ p: 2.5 }}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontSize: '1.3rem',
-              fontWeight: 'bold',
-              color: '#333',
-              mb: 0.5,
-              fontFamily: 'Noto Sans KR',
-            }}
-          >
+      <Card className="bg-white border-l-4 border-[#667eea] shadow-sm hover:shadow-md transition-all duration-200 h-full">
+        <CardContent className="p-6">
+          <h4 className="text-xl font-bold text-gray-800 mb-2 font-korean">
             {phrase.korean}
-          </Typography>
+          </h4>
 
-          <Typography
-            variant="body2"
-            sx={{
-              color: '#667eea',
-              fontStyle: 'italic',
-              mb: 0.5,
-              fontSize: '0.95rem',
-            }}
-          >
+          <p className="text-[#667eea] italic mb-2 text-sm">
             {phrase.pronunciation}
-          </Typography>
+          </p>
 
-          <Typography
-            variant="body1"
-            sx={{
-              color: '#666',
-              mb: 1,
-              fontSize: '1rem',
-              fontWeight: 500,
-            }}
-          >
+          <p className="text-gray-600 mb-4 text-base font-medium">
             {phrase.japanese}
-          </Typography>
+          </p>
 
-          <Box
-            sx={{
-              background: '#f8f9fa',
-              p: 1.5,
-              borderRadius: 1,
-              border: '1px solid #e9ecef',
-            }}
-          >
-            <Typography
-              variant="body2"
-              sx={{
-                color: '#888',
-                fontSize: '0.85rem',
-                fontStyle: 'italic',
-                lineHeight: 1.4,
-              }}
-            >
+          <div className="bg-gray-50 p-4 rounded border border-gray-200">
+            <p className="text-gray-500 text-xs italic leading-relaxed">
               💡 {phrase.usage}
-            </Typography>
-          </Box>
+            </p>
+          </div>
         </CardContent>
       </Card>
     </motion.div>
