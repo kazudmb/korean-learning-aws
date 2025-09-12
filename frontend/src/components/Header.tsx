@@ -12,18 +12,19 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
-      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 min-w-0">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
+          className="flex-shrink-0"
         >
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-[#667eea] leading-tight">
+          <h1 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-[#667eea] leading-tight whitespace-nowrap">
             🇰🇷 韓国語話し言葉マスター
           </h1>
         </motion.div>
 
-        <div className="flex gap-2 md:gap-4">
+        <div className="flex gap-2 md:gap-4 flex-shrink-0">
           {[
             { label: 'フレーズ集', id: 'phrases' },
             { label: '練習問題', id: 'quiz' },
