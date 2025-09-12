@@ -19,8 +19,7 @@ const Header: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-[#667eea] leading-tight">
-            <span className="block sm:inline">🇰🇷 韓国語話し言葉</span>
-            <span className="block sm:inline">マスター</span>
+            🇰🇷 韓国語話し言葉マスター
           </h1>
         </motion.div>
 

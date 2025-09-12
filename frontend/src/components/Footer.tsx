@@ -22,15 +22,15 @@ const Footer: React.FC = () => {
             </p>
 
             <p className="opacity-70 text-xs mb-6 leading-relaxed">
-              <span className="block sm:inline">&copy; 2025 Korean Learning Platform.</span>
-              <span className="block sm:inline sm:ml-1">친구처럼 자연스럽게 한국어를 배워보세요!</span>
-              <span className="block sm:inline sm:ml-1">(友達のように自然に韓国語を学んでみましょう!)</span>
+              &copy; 2025 Korean Learning Platform. <br />
+              친구처럼 자연스럽게 한국어를 배워보세요! <br />
+              (友達のように自然に韓国語を学んでみましょう!)
             </p>
 
             <div className="mt-6 pt-4 border-t border-white/20">
               <p className="opacity-60 text-xs italic leading-relaxed">
-                <span className="block sm:inline">Made with ❤️ for Korean language learners</span>
-                <span className="block sm:inline sm:ml-1">Built with React, TypeScript, and AWS</span>
+                Made with ❤️ for Korean language learners<br />
+                Built with React, TypeScript, and AWS
               </p>
             </div>
           </div>

@@ -86,8 +86,8 @@ const QuizResult: React.FC<QuizResultProps> = ({ result, onRetry }) => {
             </div>
 
             <div className="bg-blue-50 p-4 rounded-lg text-sm text-gray-700 leading-relaxed">
-              <span className="block sm:inline">継続的な学習で韓国語をマスターしましょう！</span>
-              <span className="block sm:inline sm:ml-1">間違えた問題を復習して、次回はもっと良い結果を目指しましょう。</span>
+              継続的な学習で韓国語をマスターしましょう！<br />
+              間違えた問題を復習して、次回はもっと良い結果を目指しましょう。
             </div>
           </motion.div>
 
