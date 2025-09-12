@@ -5,7 +5,6 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import PhrasesSection from './components/PhrasesSection';
 import QuizSection from './components/QuizSection';
-import LevelsSection from './components/LevelsSection';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
@@ -15,7 +14,6 @@ const App: React.FC = () => {
       <Hero />
       <PhrasesSection />
       <QuizSection />
-      <LevelsSection />
       <Footer />
     </div>
   );

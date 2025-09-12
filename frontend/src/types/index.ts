@@ -45,15 +45,6 @@ export interface QuizResult {
   percentage: number;
 }
 
-// レベルの型定義
-export interface Level {
-  id: string;
-  title: string;
-  description: string;
-  features: string[];
-  color: string;
-}
-
 // アプリケーションの状態の型定義
 export interface AppState {
   // フレーズ関連
@@ -110,9 +101,4 @@ export interface QuestionProps {
 export interface QuizResultProps {
   result: QuizResult;
   onRetry: () => void;
-}
-
-export interface LevelCardProps {
-  level: Level;
-  onClick: (level: Level) => void;
 }

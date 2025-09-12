@@ -27,7 +27,6 @@ const Header: React.FC = () => {
           {[
             { label: 'フレーズ集', id: 'phrases' },
             { label: '練習問題', id: 'quiz' },
-            { label: 'レベル別', id: 'levels' },
           ].map((item, index) => (
             <motion.div
               key={item.id}
