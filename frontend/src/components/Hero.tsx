@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-3xl md:text-5xl mb-4 drop-shadow-lg font-bold leading-tight">
-            実際の会話で使われる<br />韓国語をマスターしよう
+            実際の会話で使われる<br className="sm:hidden" />韓国語をマスターしよう
           </h2>
         </motion.div>
 
@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <p className="text-base md:text-xl mb-8 opacity-90 font-normal leading-relaxed">
-            教科書にない自然な話し言葉とパンマルを<br />段階的に学習できます
+            教科書にない自然な話し言葉とパンマルを<br className="sm:hidden" />段階的に学習できます
           </p>
         </motion.div>
 
