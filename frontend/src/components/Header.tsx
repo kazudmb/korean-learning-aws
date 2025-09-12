@@ -18,8 +18,9 @@ const Header: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-xl md:text-2xl font-bold text-[#667eea]">
-            🇰🇷 韓国語話し言葉マスター
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-[#667eea] leading-tight">
+            <span className="block sm:inline">🇰🇷 韓国語話し言葉</span>
+            <span className="block sm:inline">マスター</span>
           </h1>
         </motion.div>
 

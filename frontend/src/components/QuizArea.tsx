@@ -72,7 +72,7 @@ const QuizArea: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h4 className="text-lg font-semibold text-gray-800 mb-4">
+            <h4 className="text-lg font-semibold text-gray-800 mb-4 leading-relaxed break-words">
               Q{currentQuestionIndex + 1}. {currentQuestion.question}
             </h4>
             
@@ -87,7 +87,7 @@ const QuizArea: React.FC = () => {
                     variant={currentAnswer === index ? "default" : "outline"}
                     onClick={() => handleOptionSelect(index)}
                     disabled={isAnswered}
-                    className={`w-full p-4 text-left justify-start h-auto ${
+                    className={`w-full p-4 text-left justify-start h-auto break-words leading-relaxed flex items-start ${
                       isAnswered && index === currentQuestion.correct
                         ? 'bg-green-500 text-white'
                         : isAnswered && currentAnswer === index && index !== currentQuestion.correct
@@ -95,10 +95,10 @@ const QuizArea: React.FC = () => {
                         : ''
                     }`}
                   >
-                    <span className="font-medium mr-3">
+                    <span className="font-medium mr-3 flex-shrink-0">
                       {String.fromCharCode(65 + index)}.
                     </span>
-                    {option}
+                    <span className="flex-1">{option}</span>
                   </Button>
                 </motion.div>
               ))}
